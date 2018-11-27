@@ -25,7 +25,7 @@ func (d *doStubObject) RequestHttp(url string) (string, error) {
 	return string(body), nil
 }
 
-func ExampleMockClientByHandleFunction() {
+func ExampleMockHandleClient() {
 	requiredUrl := "http://some-path"
 	expectedRes := `whatever`
 
@@ -52,7 +52,7 @@ func ExampleMockClientByHandleFunction() {
 	// whatever
 }
 
-func ExampleMockClientByExpectedResponse() {
+func ExampleMockResponseClient() {
 	expectedResBody := `whatever`
 	expectedRes := http.Response{
 		StatusCode: 200,
