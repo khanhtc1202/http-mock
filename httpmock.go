@@ -10,7 +10,7 @@ func (f RoundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) {
 
 // Mock http.Client by HandleFunction
 // returns *http.Client with Transport replaced to avoid making real calls
-func MockClientByHandleFunction(fn RoundTripFunc) *http.Client {
+func MockHandleClient(fn RoundTripFunc) *http.Client {
 	return &http.Client{
 		Transport: RoundTripFunc(fn),
 	}
@@ -18,8 +18,8 @@ func MockClientByHandleFunction(fn RoundTripFunc) *http.Client {
 
 // Mock http.Client by ExpectedResponse
 // returns *http.Client with declared response
-func MockClientByExpectedResponse(res *http.Response) *http.Client {
-	return MockClientByHandleFunction(func(req *http.Request) *http.Response {
+func MockResponseClient(res *http.Response) *http.Client {
+	return MockHandleClient(func(req *http.Request) *http.Response {
 		return res
 	})
 }

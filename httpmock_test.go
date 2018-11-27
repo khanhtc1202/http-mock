@@ -29,7 +29,7 @@ func ExampleMockClientByHandleFunction() {
 	requiredUrl := "http://some-path"
 	expectedRes := `whatever`
 
-	mockClient := http_mock.MockClientByHandleFunction(func(req *http.Request) *http.Response {
+	mockClient := http_mock.MockHandleClient(func(req *http.Request) *http.Response {
 		// Do stub with request object
 		if req.URL.String() == requiredUrl {
 			fmt.Println(req.URL.String())
@@ -59,7 +59,7 @@ func ExampleMockClientByExpectedResponse() {
 		Body:       ioutil.NopCloser(bytes.NewBufferString(expectedResBody)),
 	}
 
-	mockClient := http_mock.MockClientByExpectedResponse(&expectedRes)
+	mockClient := http_mock.MockResponseClient(&expectedRes)
 
 	doStubObj := doStubObject{client: mockClient}
 	res, _ := doStubObj.RequestHttp("http://....")
